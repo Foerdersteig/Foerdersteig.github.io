@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fördersteig — Der Wegweiser zu Fördermitteln im Oberland</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F1E6;
+    --paper-dark:#EBE1C9;
+    --ink:#201D17;
+    --ink-soft:#4A4437;
+    --yellow:#E7B10A;
+    --yellow-dark:#C89408;
+    --forest:#33503E;
+    --forest-dark:#223629;
+    --wood:#6E4A2E;
+    --wood-dark:#4E3320;
+    --rust:#A63A2C;
+    --line: rgba(32,29,23,0.16);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  html,body{ overflow-x:hidden; width:100%; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  h1,h2,h3,.signage{
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+    margin:0;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:inherit;}
+  img{max-width:100%;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
+  section{padding:96px 0;}
+  @media(max-width:640px){ section{padding:64px 0;} }
+
+  ::selection{ background:var(--yellow); color:var(--ink); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(246,241,230,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 28px; max-width:1080px; margin:0 auto;
+  }
+  .wordmark{
+    display:flex; align-items:center; gap:10px;
+    font-size:1.25rem; font-weight:600;
+  }
+  .wordmark .mark{
+    width:22px; height:22px; background:var(--yellow);
+    border:2px solid var(--ink);
+    clip-path:polygon(0 0, 70% 0, 100% 50%, 70% 100%, 0 100%);
+  }
+  nav.links{ display:flex; gap:28px; font-size:0.92rem; }
+  nav.links a{ text-decoration:none; color:var(--ink-soft); border-bottom:1px solid transparent; padding-bottom:2px; transition:border-color .15s, color .15s;}
+  nav.links a:hover{ color:var(--ink); border-color:var(--yellow-dark); }
+  @media(max-width:720px){ nav.links{ display:none; } }
+  @media(max-width:480px){
+    .nav{ padding:14px 18px; gap:10px; }
+    .wordmark{ font-size:1.05rem; }
+    .nav .btn{ padding:10px 14px; font-size:0.72rem; }
+  }
+  .btn{
+    display:inline-block; font-family:'Oswald',sans-serif; text-transform:uppercase; letter-spacing:0.04em;
+    font-size:0.85rem; font-weight:600; text-decoration:none;
+    padding:12px 22px; border-radius:2px; border:2px solid var(--ink); cursor:pointer;
+  }
+  .btn-primary{ background:var(--forest); color:var(--paper); border-color:var(--forest); }
+  .btn-primary:hover{ background:var(--forest-dark); border-color:var(--forest-dark); }
+  .btn-ghost{ background:transparent; color:var(--ink); }
+  .btn-ghost:hover{ background:var(--ink); color:var(--paper); }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding-top:64px; padding-bottom:40px; }
+  .hero-grid{
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center;
+  }
+  .hero-grid > div{ min-width:0; }
+  @media(max-width:880px){ .hero-grid{ grid-template-columns:1fr; } }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:0.8rem; letter-spacing:0.08em;
+    color:var(--forest); text-transform:uppercase; margin-bottom:18px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:""; width:8px; height:8px; background:var(--rust); border-radius:50%; display:inline-block;}
+  .hero h1{
+    font-size:clamp(2.2rem, 4.4vw, 3.4rem); line-height:1.08; font-weight:700; letter-spacing:0.005em;
+  }
+  .hero h1 em{ font-style:normal; color:var(--forest); }
+  .hero p.lede{
+    font-size:1.12rem; color:var(--ink-soft); max-width:46ch; margin-top:22px;
+  }
+  .hero-cta{ margin-top:34px; display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
+
+  .signup{
+    display:flex; gap:0; border:2px solid var(--ink); max-width:420px; margin-top:34px; border-radius:2px; overflow:hidden;
+  }
+  .signup input{
+    border:none; padding:14px 16px; font-family:'Work Sans',sans-serif; font-size:0.95rem; flex:1; min-width:0; background:var(--paper); color:var(--ink); outline:none;
+  }
+  .signup button{
+    border:none; background:var(--yellow); color:var(--ink); font-family:'Oswald',sans-serif; text-transform:uppercase;
+    font-weight:600; letter-spacing:0.03em; padding:0 20px; cursor:pointer; font-size:0.85rem; flex-shrink:0; white-space:nowrap;
+  }
+  .signup button:hover{ background:var(--yellow-dark); }
+  .fineprint{ font-size:0.8rem; color:var(--ink-soft); margin-top:10px; }
+  @media(max-width:380px){
+    .signup{ max-width:100%; }
+    .signup input{ padding:12px 12px; font-size:0.9rem; }
+    .signup button{ padding:0 14px; font-size:0.78rem; }
+  }
+
+  /* ---------- Signpost ---------- */
+  .signpost-scene{ display:flex; justify-content:center; padding:24px 0; }
+  .signpost{ position:relative; width:100%; max-width:380px; padding-left:32px; }
+  .post{
+    position:absolute; left:0; top:0; bottom:-14px; width:14px;
+    background:linear-gradient(90deg, var(--wood-dark), var(--wood) 40%, var(--wood-dark));
+    border-radius:3px; box-shadow: 0 8px 18px rgba(32,29,23,0.18);
+  }
+  .post::after{
+    content:""; position:absolute; left:-10px; right:-10px; bottom:-10px; height:12px;
+    background:var(--wood-dark); border-radius:50%; opacity:0.5; filter:blur(2px);
+  }
+  .fingerposts{ display:flex; flex-direction:column; gap:15px; }
+  .fingerpost{
+    background:var(--yellow); border:2px solid var(--ink); color:var(--ink);
+    padding:11px 18px 11px 20px;
+    clip-path:polygon(0 0, 88% 0, 100% 50%, 88% 100%, 0 100%);
+    width:fit-content; max-width:100%;
+    box-shadow:3px 4px 0 rgba(32,29,23,0.14);
+    opacity:0; transform:translateX(-14px) rotate(var(--tilt,0deg));
+    animation:sign-in .55s ease forwards;
+    animation-delay:var(--delay, 0s);
+  }
+  .fingerpost:nth-child(1){ --tilt:-2deg; --delay:.05s; }
+  .fingerpost:nth-child(2){ --tilt:1.5deg; --delay:.18s; }
+  .fingerpost:nth-child(3){ --tilt:-1.2deg; --delay:.31s; }
+  .fingerpost:nth-child(4){ --tilt:1.8deg; --delay:.44s; }
+  .fingerpost:nth-child(5){ --tilt:-2deg; --delay:.57s; }
+
+  @keyframes sign-in{
+    to{ opacity:1; transform:translateX(0) rotate(var(--tilt,0deg)); }
+  }
+  .fingerpost .fp-label{
+    font-family:'Oswald',sans-serif; font-weight:600; font-size:0.82rem; letter-spacing:0.02em; text-transform:uppercase; display:block;
+  }
+  .fingerpost .fp-meta{
+    font-family:'IBM Plex Mono', monospace; font-size:0.75rem; color:var(--forest-dark); display:block; margin-top:3px;
+  }
+  .fingerpost:hover{ transform:translateX(4px) rotate(0deg) !important; transition:transform .2s; }
+
+  @media(max-width:480px){
+    .signpost{ max-width:100%; padding-left:24px; }
+    .fingerpost{ padding:9px 14px 9px 16px; }
+    .fp-label{ font-size:0.74rem; }
+    .fp-meta{ font-size:0.68rem; }
+  }
+
+  /* ---------- Problem stats ---------- */
+  .stats-section{ background:var(--forest); color:var(--paper); }
+  .stats-section h2{ color:var(--paper); font-size:1.9rem; max-width:22ch; }
+  .stats-intro{ color:rgba(246,241,230,0.72); max-width:56ch; margin-top:14px; font-size:1.02rem;}
+  .stat-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin-top:52px;
+    background:rgba(246,241,230,0.18);
+  }
+  @media(max-width:720px){ .stat-grid{ grid-template-columns:1fr; } }
+  .stat{ background:var(--forest); padding:32px 26px; }
+  .stat .num{ font-family:'IBM Plex Mono', monospace; font-size:2.6rem; color:var(--yellow); font-weight:500; }
+  .stat .label{ margin-top:10px; font-size:0.95rem; color:rgba(246,241,230,0.82); max-width:28ch; }
+
+  /* ---------- How it works ---------- */
+  .steps{ margin-top:56px; display:grid; grid-template-columns:repeat(3,1fr); gap:0; position:relative; }
+  @media(max-width:800px){ .steps{ grid-template-columns:1fr; gap:28px; } }
+  .step{ position:relative; padding:0 26px 0 0; }
+  .step:not(:last-child)::after{
+    content:""; position:absolute; top:22px; right:-2px; width:calc(100% - 44px); height:2px;
+    background-image:linear-gradient(to right, var(--ink) 60%, transparent 0);
+    background-size:10px 2px; background-repeat:repeat-x;
+  }
+  @media(max-width:800px){ .step:not(:last-child)::after{ display:none; } }
+  .step .leg{
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--rust); letter-spacing:0.05em;
+  }
+  .step h3{ font-size:1.2rem; margin-top:12px; }
+  .step p{ color:var(--ink-soft); margin-top:10px; font-size:0.98rem; }
+
+  /* ---------- Logbook (funding source list) ---------- */
+  .logbook{ background:var(--paper-dark); }
+  .logbook h2{ font-size:1.9rem; }
+  .logbook-intro{ color:var(--ink-soft); max-width:60ch; margin-top:14px; }
+  .swipe-hint{ display:none; font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--ink-soft); margin:18px 0 -6px; }
+  .table-scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  table.entries{ width:100%; min-width:640px; border-collapse:collapse; margin-top:44px; font-size:0.94rem; }
+  @media(max-width:720px){
+    .swipe-hint{ display:block; }
+    table.entries{ margin-top:16px; }
+  }
+  table.entries caption{ text-align:left; font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--ink-soft); margin-bottom:10px; }
+  table.entries th{
+    text-align:left; font-family:'Oswald',sans-serif; text-transform:uppercase; font-size:0.76rem; letter-spacing:0.05em;
+    color:var(--ink-soft); border-bottom:2px solid var(--ink); padding:10px 12px;
+  }
+  table.entries td{ padding:14px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  table.entries tr:hover td{ background:rgba(231,177,10,0.14); }
+  .tag{
+    display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:0.72rem; padding:2px 8px;
+    border:1px solid var(--forest); color:var(--forest); border-radius:20px;
+  }
+  .amt{ font-family:'IBM Plex Mono', monospace; font-weight:500; }
+  .deadline{ font-family:'IBM Plex Mono', monospace; color:var(--rust); }
+  .table-note{ font-size:0.82rem; color:var(--ink-soft); margin-top:16px; }
+
+  /* ---------- Pricing ---------- */
+  .pricing-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:48px; align-items:stretch; }
+  @media(max-width:920px){ .pricing-grid{ grid-template-columns:1fr; max-width:440px; margin-left:auto; margin-right:auto; } }
+  .plan{
+    border:2px solid var(--ink); padding:32px 30px; background:var(--paper); position:relative;
+    display:flex; flex-direction:column;
+  }
+  .plan.highlight{ background:var(--forest); color:var(--paper); border-color:var(--forest); }
+  .plan .plan-for{ font-family:'IBM Plex Mono', monospace; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--rust); min-height:2.6em; }
+  .plan.highlight .plan-for{ color:var(--yellow); }
+  .plan h3{ font-size:1.5rem; margin-top:10px; }
+  .plan .price{ font-family:'IBM Plex Mono',monospace; font-size:1.6rem; margin-top:14px; }
+  .plan .price span{ font-size:0.9rem; font-weight:400; opacity:0.7; }
+  .plan .price-sub{ font-family:'IBM Plex Mono',monospace; font-size:0.85rem; color:var(--rust); margin-top:4px; }
+  .plan.highlight .price-sub{ color:var(--yellow); }
+  .plan ul{ list-style:none; padding:0; margin:22px 0 0; font-size:0.94rem; flex:1; }
+  .plan li{ padding:8px 0; border-top:1px solid var(--line); }
+  .plan.highlight li{ border-top:1px solid rgba(246,241,230,0.22); }
+  .plan .btn{ margin-top:26px; width:100%; text-align:center; }
+
+  /* ---------- Final CTA ---------- */
+  .final-cta{ text-align:center; }
+  .final-cta h2{ font-size:clamp(1.7rem,3.6vw,2.5rem); max-width:26ch; margin:0 auto; }
+  .final-cta .signup{ margin:30px auto 0; }
+  .final-cta .fineprint{ }
+
+  footer{ border-top:1px solid var(--line); padding:36px 0; }
+  .footer-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; font-size:0.85rem; color:var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="wordmark"><span class="mark"></span>Fördersteig</div>
+    <nav class="links">
+      <a href="#vereine">Für Vereine</a>
+      <a href="#wie">So funktioniert's</a>
+      <a href="#toepfe">Fördertöpfe</a>
+      <a href="#preise">Preise</a>
+    </nav>
+    <a href="#warteliste" class="btn btn-primary">Auf die Warteliste</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Landkreis Bad Tölz–Wolfratshausen · Isarwinkel · Loisachtal</div>
+      <h1>Die Fördertöpfe im Oberland liegen bereit. <em>Nur findet sie kaum jemand.</em></h1>
+      <p class="lede">Über acht verschiedene Stellen vergeben Zuschüsse an Vereine, Gründer:innen und kleine Betriebe im Landkreis — Landkreis, Städte, Sparkassen-Stiftung, Freistaat, EU. Fördersteig bringt sie an einen Ort — mit Frist, wo es eine gibt, und dem Hinweis, dass Sie sofort loslegen können, wo es keine gibt.</p>
+      <form class="signup" id="waitlist-form">
+        <input type="email" placeholder="ihre@email.de" required aria-label="E-Mail-Adresse">
+        <button type="submit">Warteliste</button>
+      </form>
+      <p class="fineprint">Kostenlos für Vereine · Start im Landkreis Bad Tölz–Wolfratshausen</p>
+    </div>
+
+    <div class="signpost-scene" aria-hidden="false">
+      <div class="signpost">
+        <div class="post"></div>
+        <div class="fingerposts">
+          <div class="fingerpost"><span class="fp-label">Vereinsförderung</span><span class="fp-meta">bis 10.000 €</span></div>
+          <div class="fingerpost"><span class="fp-label">Existenzgründung</span><span class="fp-meta">Beratung + Förderkredit</span></div>
+          <div class="fingerpost"><span class="fp-label">Landschaftspflege · LNPR</span><span class="fp-meta">Frist 27.03.</span></div>
+          <div class="fingerpost"><span class="fp-label">Jugendarbeit · KJR</span><span class="fp-meta">45.000 €/Jahr</span></div>
+          <div class="fingerpost"><span class="fp-label">LEADER-Region · EU</span><span class="fp-meta">laufende Antragsphase</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats-section" id="vereine">
+  <div class="wrap">
+    <h2>Das Geld ist da. Die Übersicht fehlt.</h2>
+    <p class="stats-intro">Wer einen Verein leitet oder ein kleines Unternehmen führt, hat selten Zeit, acht verschiedene Förderportale im Blick zu behalten. Das Ergebnis: Programme bleiben unentdeckt oder die wenigen echten Fristen verstreichen, ungenutzt.</p>
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="num">8+</div>
+        <div class="label">Stellen im Landkreis vergeben eigenständig Zuschüsse — Landkreis, Städte, Sparkassen-Stiftung, Freistaat, EU</div>
+      </div>
+      <div class="stat">
+        <div class="num">1×</div>
+        <div class="label">So oft informieren sich die meisten Vereinsvorstände im Jahr aktiv über neue Fördermöglichkeiten</div>
+      </div>
+      <div class="stat">
+        <div class="num">5.000 €</div>
+        <div class="label">Bekam Flößerstraße e.V. aus dem Innenstadt-Projektfonds der Stadt Wolfratshausen für das Spielefloß an der Alten Floßlände — Fördergeld, das ein Verein einfach beantragt hat</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="wie">
+  <div class="wrap">
+    <div class="eyebrow" style="margin-bottom:0;">So funktioniert's</div>
+    <h2 style="font-size:1.9rem; margin-top:14px;">Drei Etappen bis zur passenden Förderung</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="leg">ETAPPE 1</div>
+        <h3>Profil anlegen</h3>
+        <p>Verein oder Unternehmen, Standort in der Gemeinde, Themenfeld — Sport, Jugend, Umwelt, Gründung. Zwei Minuten.</p>
+      </div>
+      <div class="step">
+        <div class="leg">ETAPPE 2</div>
+        <h3>Treffer erhalten</h3>
+        <p>Nur Fördertöpfe, die wirklich passen — mit Fördersumme, Voraussetzungen und Antragsfrist auf einen Blick.</p>
+      </div>
+      <div class="step">
+        <div class="leg">ETAPPE 3</div>
+        <h3>Rechtzeitig loslegen</h3>
+        <p>Bei festen Fristen erinnern wir rechtzeitig per E-Mail. Bei laufenden Programmen bekommen Sie die Checkliste, damit Sie direkt starten können.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="logbook" id="toepfe">
+  <div class="wrap">
+    <div class="eyebrow" style="margin-bottom:0;">Auszug aus dem Wegbuch</div>
+    <h2 style="margin-top:14px;">Ein erster Blick auf die Fördertöpfe im Landkreis</h2>
+    <p class="logbook-intro">Eine kleine Auswahl der Programme, die Fördersteig zum Start erfasst — laufend ergänzt um weitere Gemeinden und Themenfelder.</p>
+    <p class="swipe-hint">Zum Ansehen der Tabelle horizontal wischen →</p>
+    <div class="table-scroll">
+    <table class="entries">
+      <caption>Stand: laufend aktualisiert · Landkreis Bad Tölz–Wolfratshausen</caption>
+      <thead>
+        <tr><th>Programm</th><th>Träger</th><th>Zielgruppe</th><th>Summe</th><th>Frist</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Zukunftsstiftung Ehrenamt</td>
+          <td>Landkreis Bad Tölz–Wolfratshausen</td>
+          <td><span class="tag">Vereine</span></td>
+          <td class="amt">bis 10.000 €</td>
+          <td class="deadline">jährlich, März</td>
+        </tr>
+        <tr>
+          <td>Innenstadt-Projektfonds</td>
+          <td>Stadt Wolfratshausen</td>
+          <td><span class="tag">Vereine & Gewerbe</span></td>
+          <td class="amt">Pool 15.000 €/Jahr</td>
+          <td class="deadline">laufend</td>
+        </tr>
+        <tr>
+          <td>Stiftung der Sparkasse</td>
+          <td>Sparkasse Bad Tölz–Wolfratshausen</td>
+          <td><span class="tag">Sport & Kultur</span></td>
+          <td class="amt">variabel</td>
+          <td class="deadline">laufend</td>
+        </tr>
+        <tr>
+          <td>Zuschüsse Jugendarbeit</td>
+          <td>Kreisjugendring</td>
+          <td><span class="tag">Jugendorganisationen</span></td>
+          <td class="amt">Pool 45.000 €/Jahr</td>
+          <td class="deadline">laufend</td>
+        </tr>
+        <tr>
+          <td>Landschaftspflege- &amp; Naturpark-Richtlinien</td>
+          <td>Freistaat Bayern</td>
+          <td><span class="tag">Naturschutz</span></td>
+          <td class="amt">projektabhängig</td>
+          <td class="deadline">Sommer / Winter</td>
+        </tr>
+        <tr>
+          <td>Beratungsnetzwerk Existenzgründung</td>
+          <td>IHK · HWK · Landkreis</td>
+          <td><span class="tag">Gründer:innen</span></td>
+          <td class="amt">kostenlose Beratung</td>
+          <td class="deadline">laufend</td>
+        </tr>
+        <tr>
+          <td>Gewerbliche Regionalförderung</td>
+          <td>Freistaat Bayern</td>
+          <td><span class="tag">Kleinunternehmen</span></td>
+          <td class="amt">investitionsabhängig</td>
+          <td class="deadline">laufend</td>
+        </tr>
+        <tr>
+          <td>LEADER-Region</td>
+          <td>EU / Landkreis</td>
+          <td><span class="tag">Innovative Projekte</span></td>
+          <td class="amt">Kofinanzierung</td>
+          <td class="deadline">laufend</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="table-note">Fördersteig ersetzt keine Rechts- oder Steuerberatung. Alle Angaben ohne Gewähr, mit Verweis auf die jeweilige Vergabestelle.</p>
+  </div>
+</section>
+
+<section id="preise">
+  <div class="wrap">
+    <div class="eyebrow" style="margin-bottom:0;">Preise</div>
+    <h2 style="font-size:1.9rem; margin-top:14px;">Drei Wege, ans Ziel zu kommen</h2>
+    <div class="pricing-grid">
+      <div class="plan">
+        <div class="plan-for">Für Vereine &amp; e. V.</div>
+        <h3>Wegweiser</h3>
+        <div class="price">0 € <span>dauerhaft</span></div>
+        <ul>
+          <li>Passende Fördertöpfe für Ihren Verein</li>
+          <li>Erinnerung bei festen Fristen, Hinweis bei laufenden Programmen</li>
+          <li>Checkliste je Förderprogramm</li>
+        </ul>
+        <a href="#warteliste" class="btn btn-ghost">Kostenlos starten</a>
+      </div>
+      <div class="plan">
+        <div class="plan-for">Für Gründer:innen &amp; Betriebe</div>
+        <h3>Etappenplan</h3>
+        <div class="price">19 € <span>/ Monat</span></div>
+        <ul>
+          <li>Alles aus „Wegweiser“</li>
+          <li>Individuelle Passgenauigkeit nach Branche</li>
+          <li>Vorausgefüllte Antrags-Checklisten</li>
+          <li>Persönlicher Ansprechpartner bei Rückfragen</li>
+        </ul>
+        <a href="#warteliste" class="btn btn-ghost">Auf die Warteliste</a>
+      </div>
+      <div class="plan highlight">
+        <div class="plan-for">Für alle, die es erledigt haben wollen</div>
+        <h3>Bergführer</h3>
+        <div class="price">200 € <span>einmalig</span></div>
+        <div class="price-sub">+ 10 % der bewilligten Fördersumme</div>
+        <ul>
+          <li>Wir übernehmen die komplette Antragstellung</li>
+          <li>Von der Programmwahl bis zur Einreichung</li>
+          <li>Die 200 € werden bei Bewilligung angerechnet</li>
+          <li>Kein Erfolg, kein Prozent — nur die Grundpauschale</li>
+        </ul>
+        <a href="#warteliste" class="btn btn-primary" style="background:var(--yellow); border-color:var(--yellow); color:var(--ink);">Jetzt anfragen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta" id="warteliste">
+  <div class="wrap">
+    <h2>Keine Förderung mehr verpassen, die für Sie gedacht war.</h2>
+    <form class="signup" style="margin-left:auto; margin-right:auto;">
+      <input type="email" placeholder="ihre@email.de" required aria-label="E-Mail-Adresse">
+      <button type="submit">Warteliste</button>
+    </form>
+    <p class="fineprint">Start im Landkreis Bad Tölz–Wolfratshausen, danach angrenzendes Oberland.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-row">
+    <div>Fördersteig — Der Wegweiser zu Fördermitteln im Oberland</div>
+    <div>Aufgestellt in Wolfratshausen</div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('form').forEach(f => {
+    f.addEventListener('submit', function(e){
+      e.preventDefault();
+      const btn = f.querySelector('button');
+      const original = btn.textContent;
+      btn.textContent = 'Danke!';
+      f.querySelector('input').value = '';
+      setTimeout(() => { btn.textContent = original; }, 2200);
+    });
+  });
+</script>
+
+</body>
+</html>
